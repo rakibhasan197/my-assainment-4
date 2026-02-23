@@ -84,7 +84,7 @@ function toggleStyle(id) {
   calculateCount();
 }
 
-// Helper to update the original card in "All" section
+
 function updateOriginalCardStatus(companyName, newStatus) {
   const cards = allCardSection.children;
   for (let card of cards) {
@@ -106,12 +106,11 @@ mainContainer.addEventListener('click', function (event) {
   const rejectBtn = event.target.closest('.rejectBtn');
   const deleteBtn = event.target.closest('.deleteBtn');
 
-  // ---------- DELETE ----------
+
   if (deleteBtn) {
     const card = deleteBtn.closest('.card');
     const companyName = card.querySelector('.mobleCorp').innerText;
 
-    // Remove original card from "All" section
     const originalCards = allCardSection.children;
     for (let i = 0; i < originalCards.length; i++) {
       const originalCard = originalCards[i];
@@ -122,17 +121,17 @@ mainContainer.addEventListener('click', function (event) {
       }
     }
 
-    // Remove the clicked card (could be from filter or All)
+   
     card.remove();
 
-    // Remove from both lists
+    
     interviewList = interviewList.filter(item => item.mobileCorp !== companyName);
     rejectedList = rejectedList.filter(item => item.mobileCorp !== companyName);
 
     calculateCount();
     checkEmpty();
 
-    // Re-render current filter view if needed
+    
     if (currentStatus === 'interviewFilterBtn') {
       if (interviewList.length === 0) {
         emptySection.classList.remove('hidden');
@@ -148,13 +147,13 @@ mainContainer.addEventListener('click', function (event) {
         renderRejected();
       }
     } else {
-      // All view – already handled by checkEmpty()
+      
     }
 
     return;
   }
 
-  // ---------- INTERVIEW BUTTON ----------
+ 
   if (interviewBtn) {
     const parentNode = interviewBtn.closest('.card');
     const mobileCorp = parentNode.querySelector('.mobleCorp').innerText;
@@ -162,7 +161,7 @@ mainContainer.addEventListener('click', function (event) {
     const remoteJob = parentNode.querySelector('.remoteJob').innerText;
     const paragraph = parentNode.querySelector('.descript').innerText;
 
-    // Update the clicked card's status button
+    
     parentNode.querySelector('.status').innerHTML = `<button class="status bg-[#EEF4FF] border-2 border-green-500 text-green-500 font-bold px-6 py-1 rounded-md">INTERVIEW</button>`;
 
     const cardInfo = {
@@ -173,19 +172,17 @@ mainContainer.addEventListener('click', function (event) {
       paragraph
     };
 
-    // Add to interviewList if not already present
+   
     const jobExistInInterview = interviewList.find(item => item.mobileCorp === cardInfo.mobileCorp);
     if (!jobExistInInterview) {
       interviewList.push(cardInfo);
     }
 
-    // Remove from rejectedList
     rejectedList = rejectedList.filter(item => item.mobileCorp !== cardInfo.mobileCorp);
 
-    // Update the original card in "All" section
     updateOriginalCardStatus(mobileCorp, 'interview');
 
-    // Re-render current filter view
+    
     if (currentStatus === 'interviewFilterBtn') {
       renderInterview();
       if (interviewList.length === 0) {
@@ -209,7 +206,6 @@ mainContainer.addEventListener('click', function (event) {
     calculateCount();
   }
 
-  // ---------- REJECT BUTTON ----------
   else if (rejectBtn) {
     const parentNode = rejectBtn.closest('.card');
     const mobileCorp = parentNode.querySelector('.mobleCorp').innerText;
@@ -217,7 +213,7 @@ mainContainer.addEventListener('click', function (event) {
     const remoteJob = parentNode.querySelector('.remoteJob').innerText;
     const paragraph = parentNode.querySelector('.descript').innerText;
 
-    // Update the clicked card's status button
+    
     parentNode.querySelector('.status').innerHTML = `<button class="status bg-[#EEF4FF] border-2 border-red-500 text-red-500 font-bold px-6 py-1 rounded-md">REJECTED</button>`;
 
     const cardInfo = {
@@ -228,16 +224,16 @@ mainContainer.addEventListener('click', function (event) {
       paragraph
     };
 
-    // Add to rejectedList if not already present
+   
     const jobExistInRejected = rejectedList.find(item => item.mobileCorp === cardInfo.mobileCorp);
     if (!jobExistInRejected) {
       rejectedList.push(cardInfo);
     }
 
-    // Remove from interviewList
+    
     interviewList = interviewList.filter(item => item.mobileCorp !== cardInfo.mobileCorp);
 
-    // Update the original card in "All" section
+    
     updateOriginalCardStatus(mobileCorp, 'rejected');
 
     // Re-render current filter view
@@ -265,7 +261,7 @@ mainContainer.addEventListener('click', function (event) {
   }
 });
 
-// Render functions (unchanged, but included for completeness)
+
 function renderInterview() {
   filterSection.innerHTML = '';
   for (let interview of interviewList) {
