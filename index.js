@@ -250,7 +250,7 @@ function renderInterview(){
     console.log(interview);
 
     let div = document.createElement('div')
-    div.className = 'card flex justify-between bg-white shadow-xs p-8 rounded-md'
+    div.className = 'card flex justify-between bg-white shadow-xs p-8 rounded-md mt-10'
     div.innerHTML =`<div class="right space-y-6">
               <!-- part 1 -->
               <div>
@@ -289,7 +289,7 @@ function renderRejected(){
     console.log(reject);
 
     let div = document.createElement('div')
-    div.className = 'card flex justify-between bg-white shadow-xs p-8 rounded-md'
+    div.className = 'card flex justify-between bg-white shadow-xs p-8 rounded-md mt-10'
     div.innerHTML =`<div class="right space-y-6">
               <!-- part 1 -->
               <div>
