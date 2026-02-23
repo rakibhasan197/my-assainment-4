@@ -5,7 +5,7 @@ let currentStatus = 'allFilterBtn'
 const total = document.getElementById('totalCount');
 const interviewCount = document.getElementById('interviewCount');
 const rejectCount = document.getElementById('rejectCount');
-const countJobs = document.getElementById('countJobs')
+const countJobs = document.getElementById('countJobs');
 
 
 const allCardSection = document.getElementById('allCards')
@@ -13,16 +13,18 @@ const mainContainer = document.querySelector('main')
 const filterSection = document.getElementById('filtered-section')
 const emptySection = document.getElementById('emptySection')
 
-function calculateCount(){
-  total.innerText = allCardSection.children.length;
-  interviewCount.innerText = interviewList.length
-  rejectCount.innerText = rejectedList.length
-  countJobs.innerText = allCardSection.children.length
+function calculateCount() {
+    total.innerText = allCardSection.children.length;
+    interviewCount.innerText = interviewList.length;
+    rejectCount.innerText = rejectedList.length;
 
-  if(currentStatus == 'interviewFilterBtn'){
-    countJobs.innerText = interviewList.length
-    console.log(interviewList.length);
-  }
+    if (currentStatus === 'interviewFilterBtn') {
+        countJobs.innerText = interviewList.length;
+    } else if (currentStatus === 'rejectFilterBtn') {
+        countJobs.innerText = rejectedList.length;
+    } else {
+        countJobs.innerText = allCardSection.children.length;
+    }
 }
 
  if(allCardSection.children.length === 0){
@@ -33,7 +35,6 @@ function calculateCount(){
 
 calculateCount();
 
-let countJob = document.getElementById('countJobs')
 
 
 
@@ -102,8 +103,7 @@ else if(id == 'rejectFilterBtn'){
   }
 }
 
-
-
+  calculateCount();
 }
 
 function checkEmpty(){
@@ -140,7 +140,6 @@ if(deleteBtn){
 
  checkEmpty();
 
-  // re-render if inside filtered tab
   if(currentStatus === 'interviewFilterBtn'){
     if(interviewList.length == 0){
       emptySection.classList.remove('hidden')
@@ -155,7 +154,7 @@ if(deleteBtn){
     renderRejected();
   }
 
-  return; // stop further checking
+  return;
 }
 
 
@@ -320,4 +319,3 @@ function renderRejected(){
     filterSection.appendChild(div);
   }
 }
-
